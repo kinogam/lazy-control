@@ -1,0 +1,30 @@
+{
+  "name": "lazy-control",
+  "description": "chrome extensions to help you control elements in the page",
+  "version": "1.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "popup/settings.html",
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": [],
+      "js": ["artyom.window.min.js", "content.js"]
+    }
+  ]
+}
