@@ -2,37 +2,24 @@
 
     const artyom = new Artyom();
 
-    // Add a single command
-    var commandHello = {
-        indexes:["hello","good morning","hey"], // These spoken words will trigger the execution of the command
-        action:function(i, wildcard){ // Action to be executed when a index match with spoken word
-            console.log(wildcard);
-            artyom.say("Hey buddy ! How are you today?");
+    artyom.addCommands({
+        indexes: ['ok', 'cancel'],
+        action(i) {
+            let selectedWord = this.indexes[i];
+            document.querySelectorAll('#container>input').forEach(item => item.style.backgroundColor = '#fff');
+            document.querySelector(`#${selectedWord}`).style.backgroundColor = 'red';
         }
-    };
+    });
 
-    artyom.addCommands(commandHello); // Add the command with addCommands method. Now
+    artyom.initialize({
+        lang:"en-GB",// A lot of languages are supported. Read the docs !
+        continuous:true,// recognize 1 command and stop listening !
+        listen:true, // Start recognizing
+        debug:true, // Show everything in the console
+        // speed:1 // talk normally
+    }).then(function(){
+        console.log("Ready to work !");
+    });
 
-
-
-    function startOneCommandArtyom(){
-        artyom.fatality();// use this to stop any of
-
-        setTimeout(function(){// if you use artyom.fatality , wait 250 ms to initialize again.
-            artyom.initialize({
-                lang:"en-GB",// A lot of languages are supported. Read the docs !
-                continuous:false,// recognize 1 command and stop listening !
-                listen:true, // Start recognizing
-                debug:true, // Show everything in the console
-                speed:1 // talk normally
-            }).then(function(){
-                console.log("Ready to work !");
-            });
-        },250);
-    }
-
-    startOneCommandArtyom();
-
-    artyom.simulateInstruction("Hello");
 
 })();
