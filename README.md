@@ -1,2 +1,2 @@
 # lazy-control
-chrome extensions to help you control elements in the page
+chrome extensions to help you control elements by voice
